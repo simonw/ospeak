@@ -1,6 +1,6 @@
 [project]
 name = "ospeak"
-version = "0.1"
+version = "0.2"
 description = "CLI tool for running text through OpenAI Text to speech"
 readme = "README.md"
 authors = [{name = "Simon Willison"}]
