@@ -71,6 +71,8 @@ def stream_and_play(
 )
 def cli(text, voice, model, output, speed, speak, token):
     "CLI tool for running text through OpenAI Text to speech"
+    if not model:
+        model = MODELS[0]
     if output:
         if not (output.endswith(".mp3") or output.endswith(".wav")):
             raise click.BadOptionUsage(
