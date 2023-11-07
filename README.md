@@ -15,6 +15,10 @@ Install this tool using `pipx`:
 ```bash
 pipx install ospeak
 ```
+This tool also depends on `ffmpeg`. You can install that on macOS using [Homebrew](https://brew.sh/) like this:
+```bash
+brew install ffmpeg
+```
 ## Usage
 
 To get your computer to say something, run:
