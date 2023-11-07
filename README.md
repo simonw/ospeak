@@ -19,6 +19,8 @@ This tool also depends on `ffmpeg`. You can install that on macOS using [Homebre
 ```bash
 brew install ffmpeg
 ```
+Note that `ospeak` has dependencies that are currently incompatible with [LLM](https://llm.datasette.io) (see [this issue](https://github.com/simonw/llm/issues/325)) so the two tools need to be installed in different virtual environments, hence the recommendation to use [pipx](https://pypa.github.io/pipx/).
+
 ## Usage
 
 To get your computer to say something, run:
