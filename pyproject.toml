@@ -1,0 +1,33 @@
+[project]
+name = "ospeak"
+version = "0.1"
+description = "CLI tool for running text through OpenAI Text to speech"
+readme = "README.md"
+authors = [{name = "Simon Willison"}]
+license = {text = "Apache-2.0"}
+requires-python = ">=3.8"
+classifiers = [
+    "License :: OSI Approved :: Apache Software License"
+]
+dependencies = [
+    "click",
+    "openai>=1.0",
+    "pydub",
+    "simpleaudio"
+]
+
+[project.urls]
+Homepage = "https://github.com/simonw/ospeak"
+Changelog = "https://github.com/simonw/ospeak/releases"
+Issues = "https://github.com/simonw/ospeak/issues"
+CI = "https://github.com/simonw/ospeak/actions"
+
+[project.entry-points.console_scripts]
+ospeak = "ospeak.cli:cli"
+
+[project.optional-dependencies]
+test = ["pytest", "cogapp"]
+
+[tool.ruff.lint]
+# Enable the isort rules.
+extend-select = ["I"]
