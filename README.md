@@ -7,6 +7,8 @@
 
 CLI tool for running text through the [OpenAI Text to speech](https://platform.openai.com/docs/guides/text-to-speech) API and speaking or saving the result
 
+See [ospeak: a CLI tool for speaking text in the terminal via OpenAI](https://simonwillison.net/2023/Nov/7/ospeak/) for background on this project.
+
 ## Installation
 
 Install this tool using `pipx`:
