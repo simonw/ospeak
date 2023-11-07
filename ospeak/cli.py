@@ -9,12 +9,15 @@ from pydub.playback import play
 VOICES = ["alloy", "echo", "fable", "onyx", "nova", "shimmer"]
 
 
-def stream_and_play(text, voice="alloy", speak=True, api_key=None, output=None):
+def stream_and_play(
+    text, voice="alloy", speed=1.0, speak=True, api_key=None, output=None
+):
     client = OpenAI(api_key=api_key)
     response = client.audio.speech.create(
         model="tts-1",
         voice=voice,
         input=text,
+        speed=speed,
     )
     byte_stream = io.BytesIO(response.content)
     audio = AudioSegment.from_file(byte_stream, format="mp3")
@@ -42,6 +45,13 @@ def stream_and_play(text, voice="alloy", speak=True, api_key=None, output=None):
     type=click.Path(writable=True, dir_okay=False, resolve_path=True, allow_dash=False),
 )
 @click.option(
+    "-x",
+    "--speed",
+    help="Speed of the voice",
+    type=click.FloatRange(0.25, 4.0),
+    default=1.0,
+)
+@click.option(
     "-s",
     "--speak",
     is_flag=True,
@@ -52,7 +62,7 @@ def stream_and_play(text, voice="alloy", speak=True, api_key=None, output=None):
     help="OpenAI API key",
     envvar="OPENAI_API_KEY",
 )
-def cli(text, voice, output, speak, token):
+def cli(text, voice, output, speed, speak, token):
     "CLI tool for running text through OpenAI Text to speech"
     if output:
         if not (output.endswith(".mp3") or output.endswith(".wav")):
@@ -67,8 +77,8 @@ def cli(text, voice, output, speak, token):
                 "voice", "Cannot use --voice=all when saving to a file"
             )
         for voice in VOICES:
-            stream_and_play(voice.title() + ".\n\n" + text, voice, True, token)
+            stream_and_play(voice.title() + ".\n\n" + text, voice, speed, True, token)
     else:
         if not voice:
             voice = VOICES[0]
-        stream_and_play(text, voice, speak or not output, token, output)
+        stream_and_play(text, voice, speed, speak or not output, token, output)

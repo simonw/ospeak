@@ -10,27 +10,27 @@ CLI tool for running text through the [OpenAI Text to speech](https://platform.o
 ## Installation
 
 Install this tool using `pipx`:
-
-    pipx install ospeak
-
+```bash
+pipx install ospeak
+```
 ## Usage
 
 To get your computer to say something, run:
-
-    ospeak "Hello there"
-
+```bash
+ospeak "Hello there"
+```
 You will need an OpenAI API key. You can set that as an environment variable:
-
-    export OPENAI_API_KEY='...'
-
+```bash
+export OPENAI_API_KEY="..."
+```
 Or you can pass it using `--token`:
-
-    ospeak --token '...' "Hello there"
-
+```bash
+ospeak --token "..." "Hello there"
+```
 You can pipe content into the tool:
-
-    echo "Hello there" | ospeak
-
+```bash
+echo "Hello there" | ospeak
+```
 Use `-v/--voice VOICE` to select a voice. The default is `alloy`. The other options are:
 
 - `echo`
@@ -40,17 +40,21 @@ Use `-v/--voice VOICE` to select a voice. The default is `alloy`. The other opti
 - `shimmer`
 
 You can pass `-v all` to hear all of the voices, each with the name of the voice spoken first.
-
-    ospeak 'This is my voice' -v all
-
+```bash
+ospeak "This is my voice" -v all
+```
+To adjust the speed, pass `-x/--speed` with a value between 0.25 and 4 (the default is 1.0):
+```bash
+ospeak "This is my fast voice" -x 2
+```
 To write the audio to a file, pass `-o/--output` with a filename ending in either `.mp3` or `.wav`:
-
-    ospeak 'This is my voice' -o voice.mp3
-
+```bash
+ospeak "This is my voice" -o voice.mp3
+```
 This will not speak out loud. If you want it to also speak, add the `-s/--speak` option:
-
-    ospeak 'This is my voice' -o voice.mp3 -s
-
+```bash
+ospeak "This is my voice" -o voice.mp3 -s
+```
 ## ospeak --help
 
 <!-- [[[cog
@@ -74,6 +78,7 @@ Options:
   -v, --voice [alloy|echo|fable|onyx|nova|shimmer|all]
                                   Voice to use
   -o, --output FILE               Save audio to this file on disk
+  -x, --speed FLOAT RANGE         Speed of the voice  [0.25<=x<=4.0]
   -s, --speak                     Speak the text even when saving to a file
   --token TEXT                    OpenAI API key
   --help                          Show this message and exit.
@@ -84,15 +89,16 @@ Options:
 ## Development
 
 To contribute to this tool, first checkout the code. Then create a new virtual environment:
-
-    cd ospeak
-    python -m venv venv
-    source venv/bin/activate
-
+```bash
+cd ospeak
+python -m venv venv
+source venv/bin/activate
+```
 Now install the dependencies and test dependencies:
-
-    pip install -e '.[test]'
-
+```bash
+pip install -e '.[test]'
+```
 To run the tests:
-
-    pytest
+```bash
+pytest
+```
