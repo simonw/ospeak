@@ -63,7 +63,16 @@ def stream_and_play(
     envvar="OPENAI_API_KEY",
 )
 def cli(text, voice, output, speed, speak, token):
-    "CLI tool for running text through OpenAI Text to speech"
+    """
+    CLI tool for running text through OpenAI Text to speech
+
+    Set the OPENAI_API_KEY environment variable to your OpenAI
+    API key to avoid using the --token option every time.
+
+    Example usage:
+
+        ospeak "Everyone deserves a pelican" --voice alloy -x 1.5
+    """
     if output:
         if not (output.endswith(".mp3") or output.endswith(".wav")):
             raise click.BadOptionUsage(

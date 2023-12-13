@@ -81,6 +81,13 @@ Usage: ospeak [OPTIONS] [TEXT]
 
   CLI tool for running text through OpenAI Text to speech
 
+  Set the OPENAI_API_KEY environment variable to your OpenAI API key to avoid
+  using the --token option every time.
+
+  Example usage:
+
+      ospeak "Everyone deserves a pelican" --voice alloy -x 1.5
+
 Options:
   --version                       Show the version and exit.
   -v, --voice [alloy|echo|fable|onyx|nova|shimmer|all]
