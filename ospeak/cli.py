@@ -2,24 +2,31 @@ import io
 import sys
 
 import click
-from openai import OpenAI
+from openai import OpenAI, NotFoundError
 from pydub import AudioSegment
 from pydub.playback import play
 
 VOICES = ["alloy", "echo", "fable", "onyx", "nova", "shimmer"]
-MODELS = ["tts-1", "tts-1-hd"]
 
 
 def stream_and_play(
     text, voice="alloy", model="tts-1", speed=1.0, speak=True, api_key=None, output=None
 ):
     client = OpenAI(api_key=api_key)
-    response = client.audio.speech.create(
-        model=model,
-        voice=voice,
-        input=text,
-        speed=speed,
-    )
+    try:
+        response = client.audio.speech.create(
+            model=model,
+            voice=voice,
+            input=text,
+            speed=speed,
+        )
+    except NotFoundError as msg:
+        try:
+            details = msg.response.json()["error"]["message"]
+        except (ValueError, KeyError):
+            details = str(msg)
+        raise click.ClickException(details)
+
     byte_stream = io.BytesIO(response.content)
     audio = AudioSegment.from_file(byte_stream, format="mp3")
     # Doesn't output ffmpeg info provided simpleaudio is installed:
@@ -43,8 +50,8 @@ def stream_and_play(
 @click.option(
     "-m",
     "--model",
-    help="Model to use",
-    type=click.Choice(MODELS),
+    help="Model to use - defaults to tts-1",
+    default="tts-1",
 )
 @click.option(
     "-o",
@@ -82,8 +89,6 @@ def cli(text, voice, model, output, speed, speak, token):
 
         ospeak "Everyone deserves a pelican" --voice alloy -x 1.5
     """
-    if not model:
-        model = MODELS[0]
     if output:
         if not (output.endswith(".mp3") or output.endswith(".wav")):
             raise click.BadOptionUsage(
