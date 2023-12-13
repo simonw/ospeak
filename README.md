@@ -56,6 +56,10 @@ You can pass `-v all` to hear all of the voices, each with the name of the voice
 ```bash
 ospeak "This is my voice" -v all
 ```
+The `-m/--model` option can be used to select a different model. The default is `tts-1`. Use `-m tts-1-hd` for a higher quality model that takes slightly longer to generate audio:
+```bash
+ospeak "This is higher quality" -m tts-1-hd
+```
 To adjust the speed, pass `-x/--speed` with a value between 0.25 and 4 (the default is 1.0):
 ```bash
 ospeak "This is my fast voice" -x 2
@@ -68,6 +72,7 @@ This will not speak out loud. If you want it to also speak, add the `-s/--speak`
 ```bash
 ospeak "This is my voice" -o voice.mp3 -s
 ```
+
 ## ospeak --help
 
 <!-- [[[cog
