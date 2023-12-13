@@ -97,6 +97,7 @@ Options:
   --version                       Show the version and exit.
   -v, --voice [alloy|echo|fable|onyx|nova|shimmer|all]
                                   Voice to use
+  -m, --model [tts-1|tts-1-hd]    Model to use
   -o, --output FILE               Save audio to this file on disk
   -x, --speed FLOAT RANGE         Speed of the voice  [0.25<=x<=4.0]
   -s, --speak                     Speak the text even when saving to a file
