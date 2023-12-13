@@ -15,10 +15,17 @@ Install this tool using `pipx`:
 ```bash
 pipx install ospeak
 ```
+Note, on MacOS there's a [broken dependency](https://github.com/simonw/ospeak/issues/4) with Python 3.12 so instead run:
+```bash 
+pipx install --python /path/to/python3.11 ospeak
+```
+
 This tool also depends on `ffmpeg`. You can install that on macOS using [Homebrew](https://brew.sh/) like this:
 ```bash
 brew install ffmpeg
 ```
+Note that `ospeak` has dependencies that are currently incompatible with [LLM](https://llm.datasette.io) (see [this issue](https://github.com/simonw/llm/issues/325)) so the two tools need to be installed in different virtual environments, hence the recommendation to use [pipx](https://pypa.github.io/pipx/).
+
 ## Usage
 
 To get your computer to say something, run:
@@ -78,6 +85,13 @@ cog.out(
 Usage: ospeak [OPTIONS] [TEXT]
 
   CLI tool for running text through OpenAI Text to speech
+
+  Set the OPENAI_API_KEY environment variable to your OpenAI API key to avoid
+  using the --token option every time.
+
+  Example usage:
+
+      ospeak "Everyone deserves a pelican" --voice alloy -x 1.5
 
 Options:
   --version                       Show the version and exit.
