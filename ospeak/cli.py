@@ -25,7 +25,9 @@ def stream_and_play(
     if speak:
         play(audio)
     if output:
-        audio.export(output, format=output.rsplit(".", 1)[-1])
+        format = output.rsplit(".", 1)[-1]
+        bitrate = "160k" if format == "mp3" else None  # we get 160k from the API
+        audio.export(output, format=format, bitrate=bitrate)
 
 
 @click.command()
